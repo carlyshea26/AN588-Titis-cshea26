@@ -86,7 +86,8 @@ axis(2, col = "#e01485", col.axis = "#e01485")  # Y-axis, i set color of axis he
 ```
 
 ## Things I Struggled With
-#1) I struggled with understanding the pois homeworks (ppois and rpois). I looked it up and tried to interpret the statistical purpose of them but am still a little confused. 
+#1) I struggled with understanding the pois homeworks (ppois and rpois). I looked it up and tried to interpret the statistical purpose of them but am still a little confused. I included a little summary within my code and I feel like that was super helpful for me in trying to understand all of the varaibles. 
 #2) As for the graph in the last part (chunk 6), I was trying to figure out a better way to format it. I feel like the way I wrote in the code to change the color is super messy.
 #3) One general question I had but didn't know the answer to is if I should include a chunk that installs the prettydoc package in my Rmd file or if just installing the package in my console is enough? I wasn't sure for the sake of someone else being able to download my file and knit it.
-#4)
+#4) I also struggled with being able to center my image on my Rmd file. (I still have no clue how to do this)
+#5) 
