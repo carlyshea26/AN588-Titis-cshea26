@@ -1,0 +1,137 @@
+---
+title: "AN588-Homework2-cshea26</span>"
+author: "Carly S McDermott"
+date: "2025-02-04"
+output:
+  prettydoc::html_pretty:
+    theme: cayman
+    toc: true
+    toc_depth: 2
+---
+
+<h1 style="text-align: center;">
+
+Carly's Homework 2
+
+</h1>
+
+![](/Users/carlymcdermott/Desktop/20181114-skipbrown067.jpg)
+
+<body>
+
+saadams// I think that you might want to try inserting picture from a link. I can't render your document because I don't have the image downloaded on my computer and you have provided a path to the image only for your computer (so it would work for you but not for others). I actually initially did the same exact thing but realized as I was trying to render my document that it wouldn't work for anyone else - I hope my way using the image link works for others because it was a little confusing for sure!
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+<h4>
+
+I DIDN'T UNDERSTAND THE POIS FUNCTIONS SO HERE IS A HINT I CREATED FOR MYSELF:
+
+-   dpois(k,λ,log) where,
+-   K: number of successful events happened in an interval
+-   lambda: mean per interval
+-   log: If TRUE then the function returns probability in form of log
+
+saadams// I think it's so funny that we did the same thing here. I also created a little notes section at the top for dpois and ppois and rpois and what lambda means because I knew I would need the reminder later.
+
+## What is the probability that she will hear more than 8 calls during any given session?
+saadams// I might try numbering your questions just so it doesn't appear cluttered in the table of contents
+
+```{r}
+#ppois() calculates the probability of a random variable that will be equal to or less than a number
+#I am very bad at statistics and don't entirely understand the goal of this function (I am interpreting it as the probability that the number of calls will be greater than the K value I assign - here I start with 8)
+lambda <- 15
+y <- ppois(8, lambda, lower.tail = FALSE) # I think I am saying FALSE here because that prevents my probability from being read as a log (but unsure totally)
+y
+```
+saadams// I think this is right! It actually made me realize that I calculated the probability of having 8 or more events instead of more than 8 events! The only thing I might say is that you didn't need to define lambda here as 15 - you could have just done ppois(8,15, lower.tail = FALSE). Doing this might make it easier to edit though if you used lambda in multiple places and wanted to automatically update it so maybe it is the better way (I'm honestly not sure)
+
+## What is the probability that she will hear no calls in a session?
+
+```{r}
+lambda <- 15
+# I am not sure if I should make custom value labels (i.e. "no calls") or just use X or a different variable (here I did y)?
+y <- dpois(0, lambda, FALSE) #dpois is used to determine the probability that that event will occur based on the mean? (Probability Density Function)
+y
+```
+saadams// this looks right to me! same comment as above - I don't know if it's necessary to define lambda or to make y. I think it would depend on if you wanted to do something else with these values.
+
+## What is the probability that she will hear exactly 3 calls in a session?
+
+```{r}
+lambda <- 15
+y <- dpois(3, lambda, FALSE) #Again I am using #dpois to determine the probability that a specific number of events will occur
+y
+```
+saadams// I did and got the same thing. Same comment about lambda and y as above.
+
+## Plot the relevant Poisson mass function over the values in range 0 ≤ x ≤ 30.
+
+```{r}
+x <- 0:30 
+lambda <- 15 # go back and do this for all chunks if you are going to assign it here again
+y <- dpois(x, lambda) #this assigns the y axis as all of the predicted probabilities that correspond to the x values 1:30
+
+plot(x, y, type = "histogram", lwd = 3, main = "Poisson Mass Function (λ = 15)",
+     xlab = "Number of Calls", ylab = "Probability")
+#For "type =" can I just put h instead of histogram? does it make a difference if i do it the other way?
+#lwd changes the line width
+#main sets the title and x and y lab sets the axes labels
+points(x, y, pch = 15, col = "pink") #different options for pch when making this plot (16 sets it to a filled in circle)
+
+```
+saadams// I think you could have done this all in one line of code (besides the points). I think I'm mostly saying the same thing above - I don't think you need to define everything (like x), but you can. It might just save space/time as assignments get more complex to condense your code a little. It does make it easier for me to follow though! I think the points you added are visually pleasing, but a little misleading because it makes it look like there were occurrence on the tail end values.
+
+## Simulate 104 results from this distribution (i.e., 2 years of Saturday monitoring sessions).Plot the simulated results using hist() and use xlim() to set the horizontal limits to be from 0 to 30. How does your histogram compare to the shape of the probability mass function you plotted above?
+
+#### (I combined these two parts because I felt like it made more sense being able to generate random data in one part and then make a histogram in another)
+
+```{r}
+#here is where i am generating random data with the n = 104, set.seed lets me reproduce my data when i run it again (i'm not sure about the 1234 i saw some variation between that and 123 in the textbook) 
+set.seed(12345) 
+lambda <- 15
+r <- rpois(n = 104, lambda = 15)
+
+#now making my histogram
+hist(r, freq = FALSE, col.lab = "#e01485", col.main = "#e01485", 
+     col = "#f0a5ea",
+     border = "#e01485",  # sets border color to pink
+     main = "Simulated Data (n=104) and Their Associated Probabilities",
+     xlab = "Number of Calls (X)", xlim = c(0, 30),
+     ylab = "Probability",
+     axes = FALSE) #okay this removes the default black x and y axis lines with the tick marks
+axis(1, col = "#e01485", col.axis = "#e01485")  # X-axis
+axis(2, col = "#e01485", col.axis = "#e01485")  # Y-axis, i set color of axis here individually instead of including them above
+
+# I was really confused on this part because everything started to change every time I ran my code to double check that it was working. But  I now understand that the point of this is to create some variation based on random data generated by R.
+#set.seed then allows me to run the same randomly generated data without creating a new set every time
+# i know there is probably a better way to change the how the graph appears in terms of writing the code for it but i am a little stuck. like it works but i feel like how i got there is a little messy 
+#I am going to try this again with ggplot2 on my final homework version 
+```
+
+saadams// I don't think we have to use ggplot2 - unless you just want to try it out! I think that you defined lambda first and then again in rpois(), which is a little repetitive. You made me realize that I actually just plotted the frequencies of my simulation instead of the probability mass function. I'm going to have to edit my own after my peer is done commenting on my code!
+
+## Things I Struggled With:
+
+#1) I struggled with understanding the pois homeworks (ppois and rpois). I looked it up and tried to interpret the statistical purpose of them but am still a little confused. I included a little summary within my code and I feel like that was super helpful for me in trying to understand all of the varaibles.
+
+saadams// I commented this above but I thought it was funny because I did the same thing. I think it seems like you understand based on what you wrote!
+
+#2) As for the graph in the last part (chunk 6), I was trying to figure out a better way to format it. I feel like the way I wrote in the code to change the color is super messy.
+
+saadams// I did mine a little differently, but I think there probably is a way to make some of those changes within the hist() function. I honestly don't think it looks bad though - it doesn't take up much space!
+
+
+#3) One general question I had but didn't know the answer to is if I should include a chunk that installs the prettydoc package in my Rmd file or if just installing the package in my console is enough? I wasn't sure for the sake of someone else being able to download my file and knit it.
+
+saadams// I actually also don't know... I think mine works without it but when I saw yours I became uncertain.
+
+#4) I also struggled with being able to center my image on my Rmd file. (I still have no clue how to do this, I think the image I put in is so large that it just takes up the whole window and isn't centered)
+
+saadams// I can't render your document because I don't have the image downloaded via the path you wrote, but I think you can write <p align="center"> above the image code and then </p> below the image code. I hope that works!
+
+#5) To my peer commenter: Feel free to let me know if you think there's anything I should focus on!
+
+saadams// I think everything is there and understandable! I might just try condensing your code a little. If you want to define lambda once and then use it throughout I might just do that at the very top of your code. I think that some things could also be written in fewer lines of code - I toally relate to writing more than I need and then having to condense later. I think it might make it easier to read your code, even though it's still pretty clear!
