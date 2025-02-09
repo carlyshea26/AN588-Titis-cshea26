@@ -38,36 +38,31 @@ I DIDN'T UNDERSTAND THE POIS FUNCTIONS SO HERE IS A HINT I CREATED FOR MYSELF:
 ```{r}
 #ppois() calculates the probability of a random variable that will be equal to or less than a number
 #I am very bad at statistics and don't entirely understand the goal of this function (I am interpreting it as the probability that the number of calls will be greater than the K value I assign - here I start with 8)
-lambda <- 15
+lambda <- 15 #I can define lambda here and then continue to use it (alternatively after feedback I realize that I can just use 15 alternatively)
 y <- ppois(8, lambda, lower.tail = FALSE) # I think I am saying FALSE here because that prevents my probability from being read as a log (but unsure totally)
 y
 ```
-saadams// I think this is right! It actually made me realize that I calculated the probability of having 8 or more events instead of more than 8 events! The only thing I might say is that you didn't need to define lambda here as 15 - you could have just done ppois(8,15, lower.tail = FALSE). Doing this might make it easier to edit though if you used lambda in multiple places and wanted to automatically update it so maybe it is the better way (I'm honestly not sure)
 
 ## 2. What is the probability that she will hear no calls in a session?
 
 ```{r}
-lambda <- 15
 # I am not sure if I should make custom value labels (i.e. "no calls") or just use X or a different variable (here I did y)?
 y <- dpois(0, lambda, FALSE) #dpois is used to determine the probability that that event will occur based on the mean? (Probability Density Function)
-y
+y #i'm choosing to keep this defined as y in case i wanted to use it again
 ```
-saadams// this looks right to me! same comment as above - I don't know if it's necessary to define lambda or to make y. I think it would depend on if you wanted to do something else with these values.
 
 ## 3. What is the probability that she will hear exactly 3 calls in a session?
 
 ```{r}
-lambda <- 15
 y <- dpois(3, lambda, FALSE) #Again I am using #dpois to determine the probability that a specific number of events will occur
 y
 ```
-saadams// I did and got the same thing. Same comment about lambda and y as above.
+
 
 ## 4. Plot the relevant Poisson mass function over the values in range 0 ≤ x ≤ 30.
 
 ```{r}
-x <- 0:30 
-lambda <- 15 # go back and do this for all chunks if you are going to assign it here again
+x <- 0:30
 y <- dpois(x, lambda) #this assigns the y axis as all of the predicted probabilities that correspond to the x values 1:30
 
 plot(x, y, type = "histogram", lwd = 3, main = "Poisson Mass Function (λ = 15)",
@@ -109,9 +104,9 @@ axis(2, col = "#e01485", col.axis = "#e01485")  # Y-axis, i set color of axis he
 #I am going to try this again with ggplot2 on my final homework version 
 ```
 
-saadams// I don't think we have to use ggplot2 - unless you just want to try it out! I think that you defined lambda first and then again in rpois(), which is a little repetitive. You made me realize that I actually just plotted the frequencies of my simulation instead of the probability mass function. I'm going to have to edit my own after my peer is done commenting on my code!
+saadams// I don't think we have to use ggplot2 - unless you just want to try it out! I think that you defined lambda first and then again in rpois(), which is a little repetitive. 
 
-## Things I Struggled With:
+## Things I Struggled With // Peer Commentary Added:
 
 #1) I struggled with understanding the pois homeworks (ppois and rpois). I looked it up and tried to interpret the statistical purpose of them but am still a little confused. I included a little summary within my code and I feel like that was super helpful for me in trying to understand all of the varaibles.
 
@@ -120,7 +115,6 @@ saadams// I commented this above but I thought it was funny because I did the sa
 #2) As for the graph in the last part (chunk 6), I was trying to figure out a better way to format it. I feel like the way I wrote in the code to change the color is super messy.
 
 saadams// I did mine a little differently, but I think there probably is a way to make some of those changes within the hist() function. I honestly don't think it looks bad though - it doesn't take up much space!
-
 
 #3) One general question I had but didn't know the answer to is if I should include a chunk that installs the prettydoc package in my Rmd file or if just installing the package in my console is enough? I wasn't sure for the sake of someone else being able to download my file and knit it.
 
@@ -133,3 +127,4 @@ saadams// I can't render your document because I don't have the image downloaded
 #5) To my peer commenter: Feel free to let me know if you think there's anything I should focus on!
 
 saadams// I think everything is there and understandable! I might just try condensing your code a little. If you want to define lambda once and then use it throughout I might just do that at the very top of your code. I think that some things could also be written in fewer lines of code - I toally relate to writing more than I need and then having to condense later. I think it might make it easier to read your code, even though it's still pretty clear!
+
