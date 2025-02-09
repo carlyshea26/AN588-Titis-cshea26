@@ -33,7 +33,6 @@ I DIDN'T UNDERSTAND THE POIS FUNCTIONS SO HERE IS A HINT I CREATED FOR MYSELF:
 -   log: If TRUE then the function returns probability in form of log
 
 
-
 ## 1. What is the probability that she will hear more than 8 calls during any given session?
 
 ```{r}
