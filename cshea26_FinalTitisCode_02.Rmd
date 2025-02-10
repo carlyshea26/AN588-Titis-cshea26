@@ -117,7 +117,7 @@ saadams// I actually also don't know... I think mine works without it but when I
 
 #4) I also struggled with being able to center my image on my Rmd file. (I still have no clue how to do this, I think the image I put in is so large that it just takes up the whole window and isn't centered)
 
-saadams// I can't render your document because I don't have the image downloaded via the path you wrote, but I think you can write <p align="center"> above the image code and then </p> below the image code. I hope that works!
+saadams// I can't render your document because I don't have the image downloaded via the path you wrote, but I think you can write < p align="center" > above the image code and then < /p > below the image code. I hope that works! ( i added spaces between the p and arrows to make it show up when you knit the document!)
 
 #5) To my peer commenter: Feel free to let me know if you think there's anything I should focus on!
 
